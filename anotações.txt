@@ -1,3 +1,0 @@
-// AULA 02
-
-// Ver o que é semantic versioning 
