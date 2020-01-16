@@ -1,0 +1,8 @@
+// AULA 02
+
+  // TODO:Ver o que é semantic versioning 
+  // Yarn add xxxxx -D // adiciona um pacote de desenvolvimento
+  // Estudar Async e Promises
+  // Olhar documentação do MongoDB de operadores
+  // TODO:adicionar o método update e o destroy no controller obs.: o github_username não faz sentido ser atualizado
+  
