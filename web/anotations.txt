@@ -1,0 +1,7 @@
+// TERCEIRO DIA
+
+// TODO: PESQUISAR PWA
+// TODO: Pesquisar Imutabilidade ( estados de react )
+// TODO: Pesquisar Sobre Cors
+// TODO: API DE CONTEXTOS DE react
+// TODO: Adicionar botões de excluir e modificar no react 

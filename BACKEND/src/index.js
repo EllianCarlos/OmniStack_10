@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors')
 const routes =  require('./routes.js')
 
 const app = express();
@@ -10,6 +11,8 @@ mongoose.connect(
   useUnifiedTopology: true}
 );
 
+// app.use(cors({origin:'http://localhost:3000'})) // Libera apenar para o localhost na porta 3000
+app.use(cors()) // Liberar para tudo
 app.use(express.json())
 app.use(routes);
 // Métodos HTTP: GET, POST, PUT, DELETE
