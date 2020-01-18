@@ -1,6 +1,6 @@
 const Dev = require('../models/Dev')
 const parseStringAsArray = require("../utils/parseStringAsArrays");
-
+//
 module.exports = {
   async index(request, response) {
     const { latitude, longitute, techs} = request.query;
