@@ -9,6 +9,7 @@ import api from '../services/api';
 function Main({ navigation }){
   const [devs, setDevs] = useState([]);
   const [currentRegion, setCurrentRegion] = useState(null);
+  const [techs, setTechs] = useState('');
 
   useEffect(() => {
     async function loadInitialPosition() {
@@ -39,15 +40,16 @@ function Main({ navigation }){
       params: {
         latitude,
         longitude,
-        techs: 'ReactJS'
-      }
+        techs,
+      },
     })
 
-    setDevs(response.data)
+    setDevs(response.data.devs);
   }
 
-  function handleReagionChanged(region){
+  function handleRegionChanged(region){
     setCurrentRegion(region);
+    loadDevs();
   }
 
   if(!currentRegion){
@@ -57,21 +59,21 @@ function Main({ navigation }){
   return (
     <>
     <MapView 
-      onRegionChangeComplete={handleReagionChanged} 
+      onRegionChangeComplete={handleRegionChanged} 
       initialRegion={currentRegion} 
       style={styles.map}
     >
       {devs.map(dev => (
-        <Marker coordinate={{ latitude: dev.location.coordinates[1], longitude: dev.location.coordinates[0]}}>
+        <Marker key={dev._id} coordinate={{ latitude: dev.location.coordinates[1], longitude: dev.location.coordinates[0]}}>
           <Image style={styles.avatar} source={{ uri:dev.avatar_url}}></Image>
           
           <Callout onPress={() => {
             navigation.navigate('Profile', {github_username: dev.github_username})
           }}>
             <View style={styles.callout} >
-              <Text style={styles.devName} >Igor Cássio</Text>
-              <Text style={styles.devBio} >CTO na @utopia</Text>
-              <Text style={styles.devTechs} >ReactJS, React Native, Node.js</Text>
+              <Text style={styles.devName} >{dev.name}</Text>
+              <Text style={styles.devBio} >{dev.bio}</Text>
+              <Text style={styles.devTechs} >{dev.techs.join(', ')}</Text>
             </View>
           </Callout>
         </Marker>
@@ -85,6 +87,7 @@ function Main({ navigation }){
         placeholderTextColor="#999"
         autoCapitalize="words"
         autoCorrect={false}
+        onChangeText={setTechs}
       />
 
       <TouchableOpacity style={styles.loadButton} onPress={loadDevs}>
