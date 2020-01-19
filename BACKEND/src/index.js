@@ -1,9 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const cors = require('cors')
-const routes =  require('./routes.js')
+const cors = require('cors');
+const http =  require('http');
+const routes =  require('./routes.js');
+const { setupWebSocket } = require('./websocket')
 
 const app = express();
+const server = http.Server(app);
+
+setupWebSocket(server);
 
 mongoose.connect(
   "mongodb+srv://elliancarlos:omnistack10wazedev@cluster0-nhnvh.mongodb.net/week10?retryWrites=true&w=majority", 
@@ -25,10 +30,13 @@ app.use(routes);
 // MongoDB (Não-relacional)
 
 
+// Adicionado o Socket.io ==> Protocolo WebSocket para possibilitar com que o Backend envie dados para o FrontEnd sem requisições HTTP
+
+
 app.post('/', (request, response) => {
   return response.json({
     'message':'Hello OmniStack'
   });
 }); // Define o caminho da rota
  
-app.listen(3333);
+server.listen(3333);
